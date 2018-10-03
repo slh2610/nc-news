@@ -13,8 +13,6 @@ class ArticleDisplay extends Component {
         <p>{this.state.article.body}</p>
         <p>Comments: {this.state.article.comment_count}</p>
         <p>{this.state.article.created_at}</p>
-        {/* <p>Created By: {this.state.article.created_by}</p>
-        <p>{this.state.article.created_by.avatar_url}</p> */}
         <button>Comment</button>
       </div >
     )

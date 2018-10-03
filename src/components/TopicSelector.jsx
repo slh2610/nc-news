@@ -17,6 +17,18 @@ class TopicSelector extends Component {
     )
   }
 
+  componentDidMount() {
+    this.getArticlesByTopic()
+  }
+
+  getArticlesByTopic = () => {
+    axios.get(`https://sallysnc-news.herokuapp.com/api/${this.props.match.params.topic_slug}/articles`)
+      .then(({ data }) => {
+        this.setState({
+          topics: data
+        })
+      })
+  }
 
 }
 

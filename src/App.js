@@ -15,18 +15,22 @@ class App extends Component {
         <nav>
           <Link to="/articles">Home</Link>
           {" | "}
-          <TopicSelector />
+          <Link to="/coding/articles">Coding</Link>
           {" | "}
-          {/* <input type="text" placeholder="Search.."></input> */}
+          <Link to="/cooking/articles">Cooking</Link>
+          {" | "}
+          <Link to="/football/articles">Football</Link>
+          {" | "}
           <Link to="/create-user">Sign Up</Link>
           {" | "}
           <Link to="/login">Login</Link>
         </nav>
+
         <Route exact path="/articles" render={() => <Articles />} />
         <Route path="/create-user" render={() => <CreateUserBox />} />
         <Route path="/login" render={() => <LoginBox />} />
         <Route path="/articles/:articleId" component={ArticleDisplay} />
-        <Route path="/:topic_slug/articles" component={TopicSelector} />
+        <Route path="/coding/articles" component={Articles} />
       </div>
     );
   }

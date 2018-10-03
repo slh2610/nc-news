@@ -8,14 +8,20 @@ class Articles extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
+        {/* {this.props.match.params.path === "/coding/articles" ? 
+      this.state.articles.filter(article => {
+        
+      }) */}
+
         {this.state.articles.map(article => {
           return <p key={article._id}>
+
             <Link to={`/articles/${article._id}`}>
               {article.title}
             </Link>
-
           </p>
         })}
       </div>
