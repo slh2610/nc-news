@@ -8,23 +8,45 @@ class Articles extends Component {
   }
 
   render() {
-    console.log(this.props)
+    const coding = this.state.articles.filter(article => article.belongs_to === 'coding')
+    const football = this.state.articles.filter(article => article.belongs_to === 'football')
+    const cooking = this.state.articles.filter(article => article.belongs_to === 'cooking')
+
     return (
-      <div>
-        {/* {this.props.match.params.path === "/coding/articles" ? 
-      this.state.articles.filter(article => {
-        
-      }) */}
-
-        {this.state.articles.map(article => {
-          return <p key={article._id}>
-
-            <Link to={`/articles/${article._id}`}>
-              {article.title}
-            </Link>
-          </p>
-        })}
-      </div>
+      < div >
+        {this.props.match.path === '/coding/articles' ?
+          coding.map(article => {
+            return <p key={article._id}>
+              <Link to={`/articles/${article._id}`}>
+                {article.title}
+              </Link>
+            </p>
+          })
+          : this.props.match.path === '/football/articles' ?
+            football.map(article => {
+              return <p key={article._id}>
+                <Link to={`/articles/${article._id}`}>
+                  {article.title}
+                </Link>
+              </p>
+            })
+            : this.props.match.path === '/cooking/articles' ?
+              cooking.map(article => {
+                return <p key={article._id}>
+                  <Link to={`/articles/${article._id}`}>
+                    {article.title}
+                  </Link>
+                </p>
+              })
+              : this.state.articles.map(article => {
+                return <p key={article._id}>
+                  <Link to={`/articles/${article._id}`}>
+                    {article.title}
+                  </Link>
+                </p>
+              })
+        }
+      </div >
     )
   }
 
