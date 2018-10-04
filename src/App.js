@@ -18,10 +18,8 @@ class App extends Component {
         <Route path="/create-user" render={() => <CreateUserBox />} />
         <Route path="/login" render={() => <LoginBox />} />
         <Route path="/articles/:articleId" component={ArticleDisplay} />
-        <Route path="/coding/articles" component={Articles} />
-        <Route path="/cooking/articles" component={Articles} />
-        <Route path="/football/articles" component={Articles} />
-        <Route path="/article/post-article" component={ArticleCreator} />
+        <Route path="/:topic/articles" component={Articles} />
+        <Route exact path="/post-article" component={ArticleCreator} />
       </div>
     );
   }

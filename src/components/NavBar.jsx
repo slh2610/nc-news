@@ -16,7 +16,7 @@ const NavBar = () => {
       {" | "}
       <Link to="/login">Login</Link>
       {" | "}
-      <Link to="/articles/post-article">Create New Article</Link>
+      <Link to="/post-article">Create New Article</Link>
     </nav>
   )
 }

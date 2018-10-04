@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import ArticleCreator from './ArticleCreator';
 import axios from 'axios';
 
 class Articles extends Component {
@@ -8,50 +9,22 @@ class Articles extends Component {
   }
 
   render() {
-    const coding = this.state.articles.filter(article => article.belongs_to === 'coding')
-    const football = this.state.articles.filter(article => article.belongs_to === 'football')
-    const cooking = this.state.articles.filter(article => article.belongs_to === 'cooking')
-
     return (
       < div >
-        {this.props.match.path === '/coding/articles' ?
-          coding.map(article => {
-            return <p key={article._id}>
-              <Link to={`/articles/${article._id}`}>
-                {article.title}
-              </Link>
-            </p>
-          })
-          : this.props.match.path === '/football/articles' ?
-            football.map(article => {
-              return <p key={article._id}>
-                <Link to={`/articles/${article._id}`}>
-                  {article.title}
-                </Link>
-              </p>
-            })
-            : this.props.match.path === '/cooking/articles' ?
-              cooking.map(article => {
-                return <p key={article._id}>
-                  <Link to={`/articles/${article._id}`}>
-                    {article.title}
-                  </Link>
-                </p>
-              })
-              : this.state.articles.map(article => {
-                return <p key={article._id}>
-                  <Link to={`/articles/${article._id}`}>
-                    {article.title}
-                  </Link>
-                </p>
-              })
-        }
+        {this.state.articles.map(article => {
+          return <p key={article._id}>
+            <Link to={`/articles/${article._id}`}>
+              {article.title}
+            </Link>
+          </p>
+        })}
+        <ArticleCreator addArticle={this.addArticle} />
       </div >
     )
   }
 
   componentDidMount() {
-    this.getArticles()
+    this.getArticlesByTopic()
   }
 
   getArticles = () => {
@@ -63,6 +36,31 @@ class Articles extends Component {
       })
   }
 
-}
+  getArticlesByTopic = () => {
+    if (this.props.match.params.topic) {
+      axios.get(`https://sallysnc-news.herokuapp.com/api/topics/${this.props.match.params.topic}/articles`)
+        .then(({ data }) => {
+          console.log(data)
+          this.setState({
+            articles: data.articles
+          })
+        })
+    } else {
+      this.getArticles()
+    }
+  }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.topic !== prevProps.match.params.topic) {
+      this.getArticlesByTopic();
+    }
+  }
+
+  addArticle = (article) => {
+    this.setState({
+      articles: [...this.state.articles, article]
+    })
+  }
+
+}
 export default Articles

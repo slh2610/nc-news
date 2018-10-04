@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
+import Comments from './Comments';
+import axios from 'axios';
 
 class ArticleDisplay extends Component {
   state = {
@@ -13,7 +15,12 @@ class ArticleDisplay extends Component {
         <p>{this.state.article.body}</p>
         <p>Comments: {this.state.article.comment_count}</p>
         <p>{this.state.article.created_at}</p>
-        <button>Comment</button>
+        <p>
+          <Link to={`/articles/${this.state.article._id}/comments`}>
+            Comments
+        </Link>
+        </p>
+        <Route path={`/articles/${this.state.article._id}/comments`} render={() => <Comments articleId={this.state.article._id} />} />
       </div >
     )
   }
