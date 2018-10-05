@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 
 class ArticleCreator extends Component {
   state = {
-    newId: null,
-    newTopic: '',
     newTitle: '',
     newBody: ''
   }
@@ -11,9 +9,6 @@ class ArticleCreator extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} >
-        <label>Topic
-         <input type="text" onChange={this.handleChange} value={this.state.newTopic} name="newTopic"></input>
-        </label>
         <label>Title
          <input type="text" onChange={this.handleChange} value={this.state.newTitle} name="newTitle" ></input>
         </label>
@@ -35,16 +30,14 @@ class ArticleCreator extends Component {
     event.preventDefault()
 
     const article = {
-      _id: Math.random(),
-      topic: this.state.newTopic,
       title: this.state.newTitle,
-      body: this.state.newBody
+      body: this.state.newBody,
+      created_by: "5b9ab6c19f86e16cdcf7636a"
     }
 
     this.props.addArticle(article)
 
     this.setState({
-      newTopic: '',
       newTitle: '',
       newBody: ''
     })

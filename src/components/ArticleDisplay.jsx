@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import Comments from './Comments';
+import Votes from './Votes';
 import axios from 'axios';
 
 class ArticleDisplay extends Component {
@@ -9,12 +10,14 @@ class ArticleDisplay extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       < div className="article-display" >
         <h1>{this.state.article.title}</h1>
         <p>{this.state.article.body}</p>
         <p>Comments: {this.state.article.comment_count}</p>
         <p>{this.state.article.created_at}</p>
+        <Votes voteCount={this.state.article.votes} id={this.props.match.params.articleId} itemType="article" />
         <p>
           <Link to={`/articles/${this.state.article._id}/comments`}>
             Comments
@@ -37,6 +40,8 @@ class ArticleDisplay extends Component {
         })
       })
   }
+
+
 }
 
 export default ArticleDisplay

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateComment from './CreateComment';
 import axios from 'axios';
+import Votes from './Votes';
 
 class Comments extends Component {
   state = {
@@ -13,7 +14,7 @@ class Comments extends Component {
         {this.state.comments.map(comment => {
           return <div>
             <p>{comment.body}</p>
-            <p>Votes: {comment.votes}</p>
+            <Votes voteCount={comment.votes} commentId={comment._id} itemType="comment" />
           </div>
         })}
         <CreateComment addComment={this.addComment} />

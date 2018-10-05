@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import ArticleCreator from './ArticleCreator';
 import axios from 'axios';
 
+
 class Articles extends Component {
   state = {
     articles: []
   }
 
   render() {
+    console.log(this.props)
     return (
       < div >
         {this.state.articles.map(article => {
@@ -18,7 +20,8 @@ class Articles extends Component {
             </Link>
           </p>
         })}
-        <ArticleCreator addArticle={this.addArticle} />
+        {this.props.user.username === undefined ? <p>You must be logged in to add an article</p>
+          : <ArticleCreator addArticle={this.addArticle} />}
       </div >
     )
   }
@@ -40,7 +43,6 @@ class Articles extends Component {
     if (this.props.match.params.topic) {
       axios.get(`https://sallysnc-news.herokuapp.com/api/topics/${this.props.match.params.topic}/articles`)
         .then(({ data }) => {
-          console.log(data)
           this.setState({
             articles: data.articles
           })
@@ -60,7 +62,9 @@ class Articles extends Component {
     this.setState({
       articles: [...this.state.articles, article]
     })
+    axios.post(`https://sallysnc-news.herokuapp.com/api/topics/${this.props.match.params.topic}/articles`, article)
   }
+
 
 }
 export default Articles
