@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom';
 
 
 class LoginBox extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    loggedIn: false
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        {this.state.loggedIn && (<Redirect to='/articles' />)}
         <label>
           Username:
         <input type="text" onChange={this.handleChange} name="username"></input>
@@ -25,13 +28,16 @@ class LoginBox extends Component {
 
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
     const user = this.state.username
+    this.setState({
+      loggedIn: true
+    })
     this.props.getUser(user)
 
     this.setState({

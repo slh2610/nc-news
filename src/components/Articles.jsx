@@ -10,7 +10,7 @@ class Articles extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // if (!this.state.articles.title) return <p>Loading....</p>
     return (
       < div >
         {this.state.articles.map(article => {
@@ -20,8 +20,8 @@ class Articles extends Component {
             </Link>
           </p>
         })}
-        {this.props.user.username === undefined ? <p>You must be logged in to add an article</p>
-          : <ArticleCreator addArticle={this.addArticle} />}
+        {Array.isArray(this.props.user) ? <ArticleCreator addArticle={this.addArticle} />
+          : <p>You must be logged in to add an article</p>}
       </div >
     )
   }

@@ -10,7 +10,7 @@ class ArticleDisplay extends Component {
   }
 
   render() {
-    console.log(this.props)
+    if (!this.state.article.title) return <p>Loading....</p>
     return (
       < div className="article-display" >
         <h1>{this.state.article.title}</h1>
@@ -19,11 +19,12 @@ class ArticleDisplay extends Component {
         <p>{this.state.article.created_at}</p>
         <Votes voteCount={this.state.article.votes} id={this.props.match.params.articleId} itemType="article" />
         <p>
-          <Link to={`/articles/${this.state.article._id}/comments`}>
+          {Array.isArray(this.props.user) ? <Link to={`/articles/${this.state.article._id}/comments`}>
             Comments
         </Link>
+            : <p>You must be logged in to view comments</p>}
         </p>
-        <Route path={`/articles/${this.state.article._id}/comments`} render={() => <Comments articleId={this.state.article._id} />} />
+        <Route path={`/articles/${this.state.article._id}/comments`} render={() => <Comments articleId={this.state.article._id} user={this.props.user} />} />
       </div >
     )
   }

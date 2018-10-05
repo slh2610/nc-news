@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     <nav>
       <Link to="/articles">Home</Link>
@@ -12,11 +12,11 @@ const NavBar = () => {
       {" | "}
       <Link to="/football/articles">Football</Link>
       {" | "}
-      <Link to="/create-user">Sign Up</Link>
+      <Link to="/logout">Logout</Link>
       {" | "}
       <Link to="/login">Login</Link>
       {" | "}
-      <Link to="/post-article">Create New Article</Link>
+      {Array.isArray(user) && <Link to="/post-article">Create New Article</Link>}
     </nav>
   )
 }
