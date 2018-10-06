@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom';
 const NavBar = ({ user }) => {
   return (
     <nav>
-      <Link to="/articles">Home</Link>
+      <Link to="/articles" className="navLink">Home</Link>
       {" | "}
-      <Link to="/coding/articles">Coding</Link>
+      <Link to="/coding/articles" className="navLink">Coding</Link>
       {" | "}
-      <Link to="/cooking/articles">Cooking</Link>
+      <Link to="/cooking/articles" className="navLink">Cooking</Link>
       {" | "}
-      <Link to="/football/articles">Football</Link>
+      <Link to="/football/articles" className="navLink">Football</Link>
       {" | "}
-      <Link to="/logout">Logout</Link>
+      <Link to="/logout" className="navLink">Logout</Link>
       {" | "}
-      <Link to="/login">Login</Link>
+      <Link to="/login" className="navLink">Login</Link>
       {" | "}
-      {Array.isArray(user) && <Link to="/post-article">Create New Article</Link>}
+      {Array.isArray(user) && <Link to="/post-article" className="navLink">Create New Article</Link>}
     </nav>
   )
 }

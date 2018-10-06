@@ -12,13 +12,23 @@ class Articles extends Component {
   render() {
     // if (!this.state.articles.title) return <p>Loading....</p>
     return (
-      < div >
+      < div>
         {this.state.articles.map(article => {
-          return <p key={article._id}>
-            <Link to={`/articles/${article._id}`}>
-              {article.title}
-            </Link>
-          </p>
+          return <div class="container">
+            <p key={article._id} >
+              <Link to={`/articles/${article._id}`} className="title">
+                {article.title}
+              </Link>
+            </p>
+            <p className="body">{article.body}></p>
+            {article.created_by !== null ?
+              <div>
+                <p className="user">{article.created_by.username}</p>
+                <p className="user"><img src={article.created_by.avatar_url} alt="user avatar"></img></p>
+              </div>
+              : <p className="user">No user info</p>
+            }
+          </div>
         })}
         {Array.isArray(this.props.user) ? <ArticleCreator addArticle={this.addArticle} />
           : <p>You must be logged in to add an article</p>}

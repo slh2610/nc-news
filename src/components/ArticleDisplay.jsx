@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import Comments from './Comments';
 import Votes from './Votes';
 import axios from 'axios';
+import dayjs from 'dayjs'
 
 class ArticleDisplay extends Component {
   state = {
@@ -10,21 +11,25 @@ class ArticleDisplay extends Component {
   }
 
   render() {
+    const { _id, title, body, created_at, votes, comment_count } = this.state.article
+    const { articleId } = this.props.match.params
+    const { user } = this.props
+
     if (!this.state.article.title) return <p>Loading....</p>
     return (
-      < div className="article-display" >
-        <h1>{this.state.article.title}</h1>
-        <p>{this.state.article.body}</p>
-        <p>Comments: {this.state.article.comment_count}</p>
-        <p>{this.state.article.created_at}</p>
-        <Votes voteCount={this.state.article.votes} id={this.props.match.params.articleId} itemType="article" />
+      < div className="container" >
+        <h1 className="title">{title}</h1>
+        <p>{body}</p>
+        <p class="date">{dayjs(created_at).format('MMMM D YYYY, h:mm:ss a')}</p>
+        <Votes voteCount={votes} id={articleId} itemType="article" />
+        <p>Comments: {comment_count}</p>
         <p>
-          {Array.isArray(this.props.user) ? <Link to={`/articles/${this.state.article._id}/comments`}>
+          {Array.isArray(user) ? <Link to={`/articles/${_id}/comments`}>
             Comments
         </Link>
             : <p>You must be logged in to view comments</p>}
         </p>
-        <Route path={`/articles/${this.state.article._id}/comments`} render={() => <Comments articleId={this.state.article._id} user={this.props.user} />} />
+        <Route path={`/articles/${_id}/comments`} render={() => <Comments articleId={_id} user={user} />} />
       </div >
     )
   }
@@ -34,7 +39,8 @@ class ArticleDisplay extends Component {
   }
 
   getArticleById = () => {
-    axios.get(`https://sallysnc-news.herokuapp.com/api/articles/${this.props.match.params.articleId}`)
+    const { articleId } = this.props.match.params
+    axios.get(`https://sallysnc-news.herokuapp.com/api/articles/${articleId}`)
       .then(({ data }) => {
         this.setState({
           article: data.article

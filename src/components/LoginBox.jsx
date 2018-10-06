@@ -11,7 +11,7 @@ class LoginBox extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} class="loginBox">
         {this.state.loggedIn && (<Redirect to='/articles' />)}
         <label>
           Username:
@@ -21,7 +21,7 @@ class LoginBox extends Component {
           Password:
         <input type="password" onChange={this.handleChange} name="password"></input>
         </label> <br />
-        <button>Login</button>
+        <button><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXYIOebjkwNlhV545KI1zwNut9lxVVYFQx7l75CoIFEs90Z1Jf" alt="Login image"></img></button>
       </form>
     )
   }

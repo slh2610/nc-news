@@ -8,10 +8,10 @@ class Votes extends Component {
 
   render() {
     return (
-      <div>
-        <p>Votes: {this.state.voteChanger + this.props.voteCount}</p>
-        <button onClick={() => this.voteChanger('up')}>Up</button>
-        <button onClick={() => this.voteChanger('down')}>Down</button>
+      <div class="votes">
+        <button onClick={() => this.voteChanger('up')}><span>💖</span></button>
+        <p>{}{this.state.voteChanger + this.props.voteCount}</p>
+        <button onClick={() => this.voteChanger('down')}><span>💔</span></button>
       </div>
     )
   }
