@@ -9,9 +9,9 @@ class Votes extends Component {
   render() {
     return (
       <div class="votes">
-        <button onClick={() => this.voteChanger('up')}><span>💖</span></button>
-        <p>{}{this.state.voteChanger + this.props.voteCount}</p>
-        <button onClick={() => this.voteChanger('down')}><span>💔</span></button>
+        <button onClick={() => this.voteChanger('up')}><span role="img" aria-label="up arrow">⬆️</span></button>
+        <p>{this.state.voteChanger + this.props.voteCount}</p>
+        <button onClick={() => this.voteChanger('down')}><span role="img" aria-label="down arrow">⬇️</span></button>
       </div>
     )
   }

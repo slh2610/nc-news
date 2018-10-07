@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DeleteComment = ({ comment, deleteComment }) => {
+const DeleteComment = ({ id, deleteComment }) => {
   return (
-    < button  >
-      Delete
+    < button class="deleteComment" onClick={() => deleteComment(id)} >
+      <span role="img" aria-label="wastebasket emoji">🗑️</span>
     </button >
   )
 

@@ -11,17 +11,13 @@ class LoginBox extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} class="loginBox">
+      <form onSubmit={this.handleSubmit}>
         {this.state.loggedIn && (<Redirect to='/articles' />)}
-        <label>
-          Username:
-        <input type="text" onChange={this.handleChange} name="username"></input>
-        </label> <br />
-        <label>
-          Password:
-        <input type="password" onChange={this.handleChange} name="password"></input>
-        </label> <br />
-        <button><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXYIOebjkwNlhV545KI1zwNut9lxVVYFQx7l75CoIFEs90Z1Jf" alt="Login image"></img></button>
+        <input type="text" onChange={this.handleChange} name="username" placeholder="  Username"></input>
+        <br />
+        <input type="password" onChange={this.handleChange} name="password" placeholder="  Password"></input>
+        <br />
+        <button class="loginBox"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXYIOebjkwNlhV545KI1zwNut9lxVVYFQx7l75CoIFEs90Z1Jf" alt="Login"></img></button>
       </form>
     )
   }

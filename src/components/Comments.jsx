@@ -13,10 +13,10 @@ class Comments extends Component {
     return (
       <div>
         {this.state.comments.map(comment => {
-          return <div>
+          return <div class="comments">
             <p>{comment.body}</p>
             <Votes voteCount={comment.votes} commentId={comment._id} itemType="comment" user={this.props.user} />
-            <DeleteComment comment={comment} deleteComment={this.deleteComment} />
+            <DeleteComment id={comment._id} deleteComment={this.deleteComment} />
           </div>
         })}
         {Array.isArray(this.props.user) ? <CreateComment addComment={this.addComment} />
@@ -45,8 +45,14 @@ class Comments extends Component {
     axios.post(`https://sallysnc-news.herokuapp.com/api/articles/${this.props.articleId}/comments`, comment)
   }
 
-  deleteComment = (comment) => {
-    // if (this.props.user.username === this.state.comment.)
+  deleteComment = (id) => {
+    const comments = this.state.comments.filter(comment => {
+      return comment._id !== id
+    })
+    this.setState({
+      comments
+    })
+    axios.delete(`https://sallysnc-news.herokuapp.com/api/comments/${id}`, id)
   }
 }
 

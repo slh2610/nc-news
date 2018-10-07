@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import ArticleCreator from './ArticleCreator';
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ class Articles extends Component {
   }
 
   render() {
-    // if (!this.state.articles.title) return <p>Loading....</p>
+    if (!this.state.articles[0]) return <p>Loading....</p>
     return (
       < div>
         {this.state.articles.map(article => {
@@ -30,7 +30,7 @@ class Articles extends Component {
             }
           </div>
         })}
-        {Array.isArray(this.props.user) ? <ArticleCreator addArticle={this.addArticle} />
+        {Array.isArray(this.props.user) ? <Route path="/post-article" render={(props) => <ArticleCreator {...props} user={this.state.user} />} />
           : <p>You must be logged in to add an article</p>}
       </div >
     )

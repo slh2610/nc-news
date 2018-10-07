@@ -3,7 +3,7 @@ import React from 'react'
 const Logout = ({ logout }) => {
   return (
     <form onSubmit={logout}>
-      <button>Logout</button>
+      <button class="logout">Logout</button>
     </form >
   )
 }

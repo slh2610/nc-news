@@ -7,10 +7,9 @@ class CreateComment extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>Enter Comment Here:
-          <textarea type="text" onChange={this.handleChange} value={this.state.commentText}></textarea>
-        </label>
-        <button>Submit</button>
+        <textarea type="text" onChange={this.handleChange} value={this.state.commentText} class="commentText" placeholder="Enter comment here"></textarea>
+        <br />
+        <button class="commentButton">Submit</button>
       </form>
     )
   }
@@ -23,10 +22,11 @@ class CreateComment extends Component {
   }
 
   handleSubmit = (event) => {
+    const currentUser = this.props.user[0]
     event.preventDefault()
     const comment = {
       body: this.state.commentText,
-      created_by: "5b9b87ceed324f1a4ce8eb06"
+      created_by: currentUser._id
     }
     this.props.addComment(comment)
 
