@@ -21,7 +21,7 @@ class ArticleDisplay extends Component {
         <h1 className="title">{title}</h1>
         <p>{body}</p>
         <p class="date">{dayjs(created_at).format('MMMM D YYYY, h:mm:ss a')}</p>
-        <Votes voteCount={votes} id={articleId} itemType="article" />
+        <Votes voteCount={votes} id={articleId} itemType="article" className="votes" />
         <p>Comments: {comment_count}</p>
         <p>
           {Array.isArray(user) ? <Link to={`/articles/${_id}/comments`}>
@@ -29,7 +29,7 @@ class ArticleDisplay extends Component {
         </Link>
             : <p>You must be logged in to view comments</p>}
         </p>
-        <Route path={`/articles/${_id}/comments`} render={() => <Comments articleId={_id} user={user} />} />
+        <Route path={`/articles/${_id}/comments`} render={() => <Comments articleId={_id} user={user} className="comments" />} />
       </div >
     )
   }

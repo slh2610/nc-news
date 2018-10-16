@@ -69,11 +69,12 @@ nav {
   margin-top: 20px;
   margin-left: 500px;
   border: solid 4px;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
+  grid-template-columns: 1fr, 3fr;
+  grid-template-rows: 1fr, 3fr, 1fr;
   grid-template-areas: 
     "title"
-    "body"
+    "votes"
+    "comments"
 }
 
 .date {
@@ -149,4 +150,17 @@ textarea {
   border-radius: 15px;
   height: 200px;
   width: 450px
+}
+
+.test {
+width: 10%
+}
+
+.user {
+float: right;
+width: 10%
+}
+
+img {
+  float: left
 }

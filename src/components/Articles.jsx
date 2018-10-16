@@ -12,9 +12,9 @@ class Articles extends Component {
   render() {
     if (!this.state.articles[0]) return <p>Loading....</p>
     return (
-      < div>
+      < div class="container">
         {this.state.articles.map(article => {
-          return <div class="container">
+          return <div >
             <p key={article._id} >
               <Link to={`/articles/${article._id}`} className="title">
                 {article.title}
@@ -22,9 +22,9 @@ class Articles extends Component {
             </p>
             <p className="body">{article.body}></p>
             {article.created_by !== null ?
-              <div>
+              <div className="test">
                 <p className="user">{article.created_by.username}</p>
-                <p className="user"><img src={article.created_by.avatar_url} alt="user avatar"></img></p>
+                <p><img src={article.created_by.avatar_url} alt="user avatar"></img></p>
               </div>
               : <p className="user">No user info</p>
             }
